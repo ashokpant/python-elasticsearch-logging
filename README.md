@@ -15,3 +15,50 @@ Parameters for **ElasticHandler**:
 | timezone | str | False | None | Timezone for which to transform @timestamp for the record. | 'Europe/Amsterdam', 'Australia/Sydney' |
 
 **ElasticHandler** is nonblocking, meaning any logging call e.g. **logging.exception** will not block calling thread. which is useful in the case of high logging load.
+
+## Build
+``` 
+poetry build -f wheel
+```
+
+## Uses
+ logging.ini file
+``` 
+[loggers]
+keys = root
+
+[handlers]
+keys = file, console, elasticsearch
+
+[formatters]
+keys = default
+
+[logger_root]
+level = DEBUG
+handlers = file, console, elasticsearch
+
+[handler_console]
+class = StreamHandler
+level = DEBUG
+formatter = default
+args = (sys.stdout,)
+
+[handler_file]
+class = handlers.RotatingFileHandler
+level = DEBUG
+formatter = default
+args = ("service.log","a",10000000,10,"utf-8")
+;args = [filename,mode,maxBytes,backupCount,encoding}
+
+[handler_elasticsearch]
+class = python_elasticsearch_logging.ElasticHandler
+args = ('http://elastic:changeme@localhost:9200','pylogger')
+level = DEBUG
+formatter = default
+
+[formatter_default]
+format = %(asctime)s - %(name)s-%(threadName)-10s-%(levelname)s - %(message)s
+datefmt =
+class = logging.Formatter
+```
+

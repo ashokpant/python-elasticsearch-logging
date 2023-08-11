@@ -1,6 +1,21 @@
-[build-system]
-requires = [
-    "setuptools",
-    "wheel"
+[tool.poetry]
+name = "python_elasticsearch_logging"
+version = "2.0.0"
+description = "Minimalistic Elasticsearch logging handler"
+authors = ["Bohdan Sydorov"]
+readme = "README.md"
+repository = "https://github.com/ashokpant/python-elasticsearch-logging"
+keywords = ["elasticsearch", "logging"]
+
+packages = [
+    { include = "*", from = "src" },
 ]
-build-backend = "setuptools.build_meta"
+
+[tool.poetry.dependencies]
+python = ">=3.7"
+elasticsearch = ">=7.0"
+pytz = "^2021.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
