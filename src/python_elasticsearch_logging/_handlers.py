@@ -1,15 +1,15 @@
 import logging
 import queue
+import sys
+import traceback as tb
 from logging import NOTSET, Handler, LogRecord
 from logging.handlers import QueueListener
-import sys
 from typing import Union
-import traceback as tb
 
 import elasticsearch as es
 
-from ._sending_handler import ElasticSendingHandler
 from ._queue_handler import ObjectQueueHandler
+from ._sending_handler import ElasticSendingHandler
 
 
 class ElasticHandler(Handler):

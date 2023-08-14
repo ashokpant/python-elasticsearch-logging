@@ -1,9 +1,8 @@
-
 import sys
-from datetime import datetime
-from logging import Handler, LogRecord
 import threading
 import traceback as tb
+from datetime import datetime
+from logging import Handler, LogRecord
 
 import elasticsearch as es
 import elasticsearch.helpers as es_helpers
@@ -36,7 +35,7 @@ class ElasticSendingHandler(Handler):
 
         if self.__timer is None:
             self.__timer = threading.Timer(self._flush_period, self.flush)
-            self.__timer.setDaemon(True)
+            self.__timer.daemon = True
             self.__timer.start()
 
     def flush(self):
@@ -79,7 +78,7 @@ class ElasticSendingHandler(Handler):
 
         timestamp_iso = timestamp_dt.isoformat()
 
-        message = record.msg_object
+        message = record.message
 
         action = {
             '_index': self._index,

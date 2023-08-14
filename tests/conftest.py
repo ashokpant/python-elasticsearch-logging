@@ -13,7 +13,7 @@ def elastic_service():
     port = '9200'
 
     docker_client = docker.from_env()
-    docker_image_name = 'elasticsearch:7.17.3'
+    docker_image_name = 'elasticsearch:8.7.0'
     docker_container_name = 'elasticsearch_test_emulator'
 
     _remove_existing_test_container(docker_client, docker_container_name)

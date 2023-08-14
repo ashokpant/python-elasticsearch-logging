@@ -2,7 +2,7 @@ import logging
 
 import pytest
 
-from src.elasticsearch_logging_handler import ElasticHandler
+from src.python_elasticsearch_logging import ElasticHandler
 
 
 def test_wrong_host(capsys: pytest.CaptureFixture[str]):

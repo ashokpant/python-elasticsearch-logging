@@ -1,4 +1,3 @@
-
 from logging import LogRecord
 from logging.handlers import QueueHandler
 
